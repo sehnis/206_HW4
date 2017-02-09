@@ -83,6 +83,17 @@ soup = BeautifulSoup(htmldoc,"html.parser")
 people = soup.find_all("div",{"class":"views-row"})
 umsi_titles = {}
 
+names = []
+titles = []
+
+for name in soup.find_all('div', {'class':'field-name-title'}):
+	names.append(name.text)
+
+for title in soup.find_all('div', {'class':'field-name-field-person-titles'}):
+	titles.append(title.text)
+
+umsi_titles = dict(zip(names, titles))
+
 ## Make pair with field-name-title and field-name-field-person-titles.
 ## Append title to umsi_titles
 
